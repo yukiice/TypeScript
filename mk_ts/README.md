@@ -223,4 +223,96 @@ getUserInfo(teacher)
 getUserInfo(student)
 
 ```
+# 联合类型
+```
+// 联合类型
+interface Brid {
+    fly: boolean
+    sing: () => {}
+}
+
+interface Dog {
+    fly: boolean
+    bark: () => {}
+}
+// 用断言的方式
+function Demo(animal: Brid | Dog) {
+    if (animal.fly) {
+        (animal as Brid).sing()
+    }
+    (animal as Dog).bark()
+}
+
+// 用in来做类型保护
+function DemoSecond(animal: Brid | Dog) {
+    if ('sing' in animal) {
+        animal.sing()
+    } else {
+        animal.bark()
+    }
+}
+// 用typeof来做语法保护
+function add(first: string | number, second: string | number) {
+    if (typeof first === 'string' || typeof second === 'string') {
+        return `${first}${second}`
+    }
+    return first + second
+}
+
+// 用instanceof来做语法保护
+class NumberObj {
+    count:number
+}
+
+function addSecond(first: object | NumberObj, second: object | NumberObj){
+    if (first instanceof NumberObj && second instanceof NumberObj) {
+        return first.count + second.count
+    }
+    return 0
+}
+
+```
+# 枚举
+```
+enum Status{
+    noSend,
+    send,
+    back
+}
+// 枚举类型  默认是从0开始的
+console.log(Status.noSend) //0
+
+
+enum Status1{
+    noSend=1,
+    send,  //send=3
+    back
+}
+// 如果指定中间的值 那么第一个值还是0  而从指定的值开始 后面的会依次递增   如果指定第一个值 那么会从第一个值开始递增
+console.log(Status1.noSend)  //1
+console.log(Status1.send)  //2
+```
+# 泛型
+## 函数泛型
+```
+// 泛型 generic  泛指的类型
+// 方便对其中的参数进行类型的限制
+// 与此同时，如果你没有对泛型进行调用时的指定，那么TS也会推断你用了什么泛型所指定的类型
+function Demo<types>(first:types,second:types){
+    return `${first}${second}`
+}
+Demo<string>('2','2')
+
+function Demo1<types1>(params:types1[]){   //types1[]  也可以写为 Array<types1>
+    return params
+}
+Demo1<string>(['2'])
+
+// 还可以传多个
+function Demo2<T,P>(nano:T,pod:P){
+    return `${nano}${pod}`
+}
+Demo2<string,number>('1',2)
+
+```
 
