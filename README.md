@@ -215,7 +215,7 @@
 
   - ```
     // public     允许在类的内外被调用
-    // private    允许在类内被调用
+    // private    允许在类内被调用，但继承的子类以及类外不能
     // protected  允许在类内以及继承的子类中使用
     
     class Person {
@@ -478,6 +478,87 @@
     ```
 
 ##### 2、类的泛型
+
+- 类的泛型，相比函数的泛型，更为抽象一些
+
+  - ```
+    interface Item {
+        name: string
+    }
+    class Demo<T extends Item>{
+        constructor(private data: T[]) { }
+        getItem(index: number): string {  //这里string不能写为T  因为item里面要求的是name为string类型  结果返回的却是t类型 所以报错
+            return this.data[index].name
+        }
+    }
+    const data = new Demo([
+        {
+            name: 'yukiice'
+        }
+    ])
+    ```
+
+- 而且也可以指定泛型的类型
+
+  - ```
+    // 这样泛型就指定了  P必须是一个string或者是一个number
+    class Demo1<P extends string | number>{
+        constructor(private data: P[]) { }
+        getData(index: number): P {
+            return this.data[index]
+        }
+    }
+    interface Test {
+        name: string
+    }
+    const Data = new Demo1<string>([])
+    const func: <T> (params: T) => string = <T>(params: T) => {
+        return '123'
+    }
+    ```
+
+#### 命名空间
+
+- 命名空间一个最明确的目的就是解决重名问题
+
+- 他可以有效的帮助我们定义标识符的可见范围，一个标识符可以在多个命名空间中进行定义，他在不同命名空间中的含义是不相干的
+
+- 这样，你在一个新的命名空间中可以定义任何标识符，他们不会和任何已有的标识符产生重复和冲突，因为已有的都存在与其他命名空间中
+
+  - ```
+    class Header {
+        constructor (){
+           const  ele = document.createElement('div')
+           ele.innerText = 'this is Header'
+           document.body.appendChild(ele)
+        }
+    }
+    
+    class Content {
+        constructor (){
+           const  ele = document.createElement('div')
+           ele.innerText = 'this is Content'
+           document.body.appendChild(ele)
+        }
+    }
+    
+    class Footer {
+        constructor (){
+           const  ele = document.createElement('div')
+           ele.innerText = 'this is Footer'
+           document.body.appendChild(ele)
+        }
+    }
+    
+    class Page{
+        constructor (){
+            new Header()
+            new Content()
+            new Footer()
+        }
+    }
+    ```
+
 
 
 

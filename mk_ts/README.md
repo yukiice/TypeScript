@@ -315,4 +315,38 @@ function Demo2<T,P>(nano:T,pod:P){
 Demo2<string,number>('1',2)
 
 ```
+## 类的泛型
+```
+interface Item {
+    name: string
+}
+
+class Demo<T extends Item>{
+    constructor(private data: T[]) { }
+    getItem(index: number): string {  //这里string不能写为T  因为item里面要求的是name为string类型  结果返回的却是t类型 所以报错
+        return this.data[index].name
+    }
+}
+
+const data = new Demo([
+    {
+        name: 'yukiice'
+    }
+])
+
+// 这样泛型就指定了  P必须是一个string或者是一个number
+class Demo1<P extends string | number>{
+    constructor(private data: P[]) { }
+    getData(index: number): P {
+        return this.data[index]
+    }
+}
+interface Test {
+    name: string
+}
+const Data = new Demo1<string>([])
+const func: <T> (params: T) => string = <T>(params: T) => {
+    return '123'
+}
+```
 
