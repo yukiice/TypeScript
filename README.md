@@ -169,6 +169,63 @@
     getUserInfo(teacher)
     getUserInfo(student)
     ```
+  
+
+------
+
+- 可索引的接口（用来做对数组和对象的约束） （并不常用）
+- 首先是对数组的约束  规定了数组中的类型
+
+- ```
+  interface UserArr {
+      [index:number]:string
+  }
+  
+  const  arr:UserArr = ['aaa','bbb']
+  console.log(arr[1])
+  ```
+
+- 然后是对于对象的约束
+
+- ```
+  interface UserObj {
+      [index:string]:string
+  }
+  const obj:UserObj = {name:'hello,this is a obj'}
+  
+  console.log(obj.name)
+  ```
+
+------
+
+- 类类型接口，使用的比较多
+
+- 对类进行了约束 与抽象类有些相似
+
+- ```
+  interface Akg {
+      name: string,
+      go(str: string): void
+  }
+  
+  class Bose implements Akg {
+      name: string;
+      constructor(name: string) {
+          this.name = name
+      }
+      go() {
+          console.log(this.name + '？？？')
+      }
+  
+  }
+  
+  const bose = new Bose('yukiice')
+  
+  console.log(bose.name)
+  bose.go()
+  ```
+
+  
 
 #### 5、类
 
@@ -252,7 +309,7 @@
   - ```
     class Person {
         constructor(private _name:string) { }
-        get name() {
+        get name() { 
             return this._name + ' hello'
         }
         set name(name:string) {
@@ -267,6 +324,37 @@
     person.name = 'yukiice hello'
     console.log(person.name)
     ```
+
+#### 类的静态方法
+
+- 类的静态方法在类内创建，可以创建方法或者属性，在类外调用
+
+- ```
+  class Person3 {
+      public name:string
+      constructor(name:string){
+          this.name = name
+      }
+  
+      run(){
+          console.log(`${this.name}属于run`)
+      }
+      static print(){  //这是静态方法
+          console.log('这是静态方法')
+      }
+      static sex = '男'  //这是静态属性
+  }
+  
+  //这样在外面 就可以直接调用static声明的两个静态属性和方法
+  
+  Person3.print()
+  console.log(Person3.sex)
+  ```
+
+#### 类的多态
+
+- 父类定义一个方法不去实现，让继承它的子类去实现，每一个子类都有不同的表现
+- 
 
 #### 类的挂载
 
@@ -309,7 +397,7 @@
             // 做判断
             // 如果这个属性不存在的话  那么就创建一个新的实例  相当于做一次存储
             if (!this.instance) {
-                this.instance = new Demo('yukiice')
+                this.instance = new Demo('yuki ice')
             }
             return this.instance
         }
@@ -465,7 +553,7 @@
     function Demo1<types1>(params:types1[]){   //types1[]  也可以写为 Array<types1>
         return params
     }
-    Demo1<string>(['2'])
+    Demo1<string>(['2']) 
     ```
 
 - 还可以传多个

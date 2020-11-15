@@ -64,3 +64,48 @@ console.log(p3.name);
 // 这里就实现了对之前的类的继承
 console.log(p3.run(), 'run');
 console.log(p3.work(), 'work');
+//  03 ------- 类里面的修饰符号  typescript里面定义属性的时候给我们提供了三种修饰符
+// {
+//     public      公有      在类里面 子类 类外面都可以访问
+//     protected   保护类型  在类里面 还有子类里面可以访问  但是在类外面不可以访问
+//     provite     私有类型  只可以在类里面可以访问
+// }
+var Person3 = /** @class */ (function () {
+    function Person3(name) {
+        this.name = name;
+    }
+    Person3.prototype.run = function () {
+        console.log(this.name + "\u5C5E\u4E8Erun");
+    };
+    Person3.print = function () {
+        console.log('这是静态方法');
+    };
+    Person3.sex = '男';
+    return Person3;
+}());
+Person3.print();
+console.log(Person3.sex);
+// 多态
+// 父类定义一个方法不去实现，让继承它的子类去实现，每一个子类都有不同的表现
+var Person4 = /** @class */ (function () {
+    function Person4(name) {
+        this.name = name;
+    }
+    Person4.prototype.p4 = function () {
+        return '${this.name}来自p4';
+    };
+    Person4.sex = '女';
+    return Person4;
+}());
+var Dog = /** @class */ (function (_super) {
+    __extends(Dog, _super);
+    function Dog(name) {
+        return _super.call(this, name) || this;
+    }
+    Dog.prototype.pdog = function () {
+        return _super.prototype.p4.call(this) + '这是pdog重新调用后加上的';
+    };
+    return Dog;
+}(Person4));
+var dog = new Dog('小花');
+console.log(dog.pdog());
