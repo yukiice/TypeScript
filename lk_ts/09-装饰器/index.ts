@@ -105,7 +105,114 @@ class Qino{
 let qinos = new Qino()
 
 // 方法装饰器
-// 它会被应用到方法上
+// 它会被应用到方法的属性描述符上面，可以用来监视、修改或者替换方法定义
+
+// 方法装饰会在运行的时候传入下列三个参数
+// 1.成员的名字
+// 2.对于静态成员来说是类的构造函数，对于实例是类的原型对象
+// 3.成员的属性描述符
+
+function logMethod(params:any){
+    return function (target:any,methodName:any,desc:any){
+        console.log(target)  //  getdata   constructor: Cat
+        console.log(methodName)   // getData
+        console.log(desc.value)  //打印出来的就是 getdata(){ console.log)(this.url)}
+
+        target.apiUrl = 'xxx'
+        target.run = function(){
+            console.log('run')
+        }
+
+        
+    }
+}
+class Cat {
+public url:any | undefined;
+constructor(){
+
+}
+@logMethod('http://baidu.com')
+getData(){
+    console.log(this.url)
+}
+}
+
+let cat:any  =new Cat()
+console.log(cat.apiUrl)
 
 
 
+// 修改装饰器的方法
+function Logs(params:any){
+    return function (target:any,methodName:any,desc:any){
+        console.log(target)  //  getdata   constructor: Cat
+        console.log(methodName)   // getData
+        console.log(desc.value)  //打印出来的就是 getdata(){ console.log)(this.url)}
+
+    // 修改装饰器的方法，把装饰器方法里传入的所有参数改为string类型
+    let  add  =desc.value
+    desc.value  =function (...args:any[]){
+        args = args.map((value)=>{
+            return String(value)
+        })
+
+        console.log(args)   //  并没有打印出来getdata里面的方法  而是打印出来了  ['111','xxx']
+
+        // 但可以通过一些方法  比如 
+        onmsgesturehold.apply(this,args)
+    }        
+    }
+}
+class Cats {
+public url:any | undefined;
+constructor(){
+
+}
+@Logs('http://baidu.com')
+getData(...args:any[]){
+    console.log('我是getdata里面的方法')
+    console.log(args)   //通过上面的一系列运算  现在这里就变成了['123','xxx']  完成了对方法装饰器的改变
+} 
+}
+
+let cats:any  =new Cats()
+Cats.getData(123,'xxx')
+
+
+
+
+
+//  4、方法参数装饰器
+// 参数装饰器表达式会在运行时候当做函数被调用，可以使用参数装饰器为类的原型增加一些元素数据，传入下列三个参数
+// 1.方法的名字
+// 2.对于静态成员来说是类的构造函数，对于实例成员是类的原型对象
+// 3.参数在函数参数列表中的索引
+
+
+function Cocoy(params:any){
+    return function (target:any,paramsName:any,paramsIndex:any){
+        console.log(params)   //  step1 'uid'
+        console.log(target)   //  stpe2  类的原型对象
+        console.log(paramsName) // step3  getData  方法的名称
+        console.log(paramsIndex) //step4 0  索引
+
+        // 因此 就可以这样操作  
+        target.apiUrl =  params  
+    }
+}
+
+
+class Cocos{
+    public url:string | undefined
+    constructor(){
+
+    }
+    // 这里调用方法的时候  会同时调用装饰器  这样可以为类的原型增加一些元数据
+    getData(@Cocoy('uid') uid:any){
+         console.log(uid)     //step5  'xxx'  这个是  uid:any这个值  传入的值
+    }
+}
+let cocos = new Cocos()
+cocos.getData('xxx')
+
+console.log(cocos.apiUrl)
