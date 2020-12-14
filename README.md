@@ -102,6 +102,29 @@
     setPersonName(person, 'yukiice')
     ```
 
+- 定义接口数组
+
+  - ```
+    interface Cocoa{
+      name:string,
+      age?:number,
+    }
+    
+    //然后通过继承的方法
+    interface Cocoas extends Array<Cocoa>{}
+    
+    //最后引用这个接口即可
+    public cocoa:Cocoas = [
+        {
+          name:'yukiice',
+          age:15
+        }
+      ]
+    
+    ```
+
+  - 
+
 - 其次可以被应用
 
   - ```
@@ -354,7 +377,6 @@
 #### 类的多态
 
 - 父类定义一个方法不去实现，让继承它的子类去实现，每一个子类都有不同的表现
-- 
 
 #### 类的挂载
 
@@ -554,6 +576,16 @@
         return params
     }
     Demo1<string>(['2']) 
+    ```
+
+- 可以对其中的数组进行推断或者限制
+
+  - ```
+    function  demos<T>(a:Array<T>):Array<T>{
+        return a 
+    }
+    const app = demos<number>([2])
+    console.log(app);
     ```
 
 - 还可以传多个
