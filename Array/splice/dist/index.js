@@ -1,0 +1,21 @@
+"use strict";
+exports.__esModule = true;
+// 只有起始位置
+var arr = [1, 2, 3, 4, 5];
+arr.splice(1);
+console.log(arr, '只有起始位置');
+var arr1 = [1, 2, 3, 4, 5];
+arr1.slice(1, 2);
+console.log(arr1, '包含删除个数');
+var arr2 = [1, 2, 3, 4, 5];
+var q = 12;
+arr2.splice(1, 2, q);
+console.log(arr2, '删除两个并插入指定位置');
+var arr3 = [1, 2, 3, 4, 5];
+var q1 = 12;
+arr3.splice(0, 1, q1);
+console.log(arr3, '插入到首位');
+var arr4 = [1, 2, 3, 4, 5];
+var q2 = 12;
+arr4.splice(-1, 1, q1);
+console.log(arr4, '插入到末位');
