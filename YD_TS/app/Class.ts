@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-08-01 01:34:02
- * @LastEditTime: 2021-08-10 23:14:14
+ * @LastEditTime: 2021-08-14 00:02:23
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /TypeScript/YD_TS/app/class.ts
@@ -86,3 +86,80 @@ class Child extends Parent{
 const c = new Child()
 
 
+class A {
+    constructor(name:string){
+        console.log(name,'this is name')
+    }
+}
+const aa = new A('lison') 
+
+
+class Pa{
+    public static age:number  = 18
+    constructor(){
+
+    }
+    public static getAge(){
+        return Pa.age
+    }
+}
+
+
+const pa = new Pa()
+console.log(Pa.getAge())
+
+
+// get和set
+class Info {
+    public name:string
+    constructor(name:string){
+        this.name = name
+    }
+    get infoStr(){
+        return this.name
+    }
+    set(value:string){
+        console.log(value)
+    }
+}
+
+
+const inf = new Info('halo')
+
+console.log(inf.infoStr)
+
+
+// 抽象类
+abstract class  cx{
+    constructor() {
+        
+    }
+    abstract cat():void
+}
+
+
+class cxchild extends cx{
+    public name:string
+    constructor(name:string){
+        super()
+        this.name = name
+    }
+    cat(){
+        return this.name
+    }
+}
+
+const cxx = new cxchild('halos')
+console.log(cxx.cat())
+
+class Ja{
+    protected name:string | undefined
+    constructor(){
+
+    }
+}
+interface I extends Ja{}
+
+class Ba extends Ja implements I{
+    public name:string | undefined
+}
