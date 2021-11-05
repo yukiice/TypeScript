@@ -1,0 +1,6 @@
+// import './BasicType/index.ts'
+// import './Symbol/index'
+// import './Interface/index'
+// import './Func/index'
+// import './Class/index'
+import './Class/index2'
