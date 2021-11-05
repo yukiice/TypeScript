@@ -3,4 +3,6 @@
 // import './Interface/index'
 // import './Func/index'
 // import './Class/index'
-import './Class/index2'
+// import './Class/index2'
+// import './ENUM/index'
+import './TypeInfer&union/index'
