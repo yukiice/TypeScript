@@ -5,4 +5,5 @@
 // import './Class/index'
 // import './Class/index2'
 // import './ENUM/index'
-import './TypeInfer&union/index'
+// import './TypeInfer&union/index'
+import './AdvancedType/index'
