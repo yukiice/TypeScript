@@ -98,8 +98,8 @@ namespace TypeInferUnion {
     let people: People | undefined
     let food: Food | undefined
     animal = people
-    animal = food
-    people = food
+    // animal = food
+    // people = food
 
     class ParentClass{
         private age:number | undefined
@@ -120,7 +120,7 @@ namespace TypeInferUnion {
     }
 
     const children:ChildClass = new ChildClass()
-    const other:ParentClass = new OtherClass()
+    // const other:ParentClass = new OtherClass()
 
 
     interface Date<T>{
@@ -129,7 +129,7 @@ namespace TypeInferUnion {
 
     let data1:Date<number> | undefined
     let data2:Date<string> | undefined
-    data1 = data2
+    // data1 = data2
     
 }
 

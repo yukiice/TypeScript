@@ -6,4 +6,6 @@
 // import './Class/index2'
 // import './ENUM/index'
 // import './TypeInfer&union/index'
-import './AdvancedType/index'
+// import './AdvancedType/index'
+// import './Other/index'
+import './AdvancedType02/index'
