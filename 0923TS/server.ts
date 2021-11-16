@@ -8,4 +8,7 @@
 // import './TypeInfer&union/index'
 // import './AdvancedType/index'
 // import './Other/index'
-import './AdvancedType02/index'
+// import './AdvancedType02/index'
+// import './Module&Namespace/index'
+// import './Decorators/index'
+import './Mixins/index'
